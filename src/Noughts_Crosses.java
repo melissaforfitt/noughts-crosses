@@ -9,14 +9,11 @@ import javafx.event.EventHandler;
 
 public class Noughts_Crosses extends Application {
 
-	// Build grid
-	GridPane grid = new GridPane();
-
 	public void buildGrid() {
 
 	}
 
-	public boolean markedX() {
+	public boolean markedX() { 
 
 		boolean x = true;
 
@@ -38,8 +35,8 @@ public class Noughts_Crosses extends Application {
 			for (int j = 0; j < 3; j++) {
 				if ()
 				boolean end = true;
-			} boolean end = false;
-		}
+			} 
+		} boolean end = false;
 
 		
 
@@ -51,6 +48,9 @@ public class Noughts_Crosses extends Application {
 	public void start(Stage primaryStage) {
 
 		buildGrid();
+		
+		// Build grid
+		GridPane grid = new GridPane();
 		
 		// Make 9 buttons
 		Button[][] b = new Button[3][3];
