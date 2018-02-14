@@ -11,8 +11,20 @@ import javafx.event.EventHandler;
 public class Noughts_Crosses extends Application {
 
 	Button b[][] = new Button[3][3];
+	GridPane grid = new GridPane();
 
 	public void buildGrid() {
+
+		// Make 9 buttons
+		for (int i = 0; i < 3; i++) {
+			for (int j = 0; j < 3; j++) {
+				b[i][j] = new Button();
+				b[i][j].setMinWidth(100);
+				b[i][j].setMinHeight(100);
+				grid.add(b[i][j], i, j);
+
+			}
+		}
 
 	}
 
@@ -32,50 +44,34 @@ public class Noughts_Crosses extends Application {
 
 	}
 
-	public boolean end() {
-
-		for (int i = 0; i < 3; i++) {
-			for (int j = 0; j < 3; j++) {
-				// if ()
-				// boolean end = true;
-			}
-		}
-		boolean end = false;
-
-		return end;
-
-	}
-
 	@Override
 	public void start(Stage primaryStage) {
 
 		buildGrid();
+
+		// Make buttons clickable for X and Y to appear on relevant turn
+
 		int turnCounter = 0;
+		while (turnCounter < 10) {
+			for (int i = 0; i < 3; i++) {
+				for (int j = 0; j < 3; j++) {
+					int x = i;
+					int y = j;
 
-		// Build grid
-		GridPane grid = new GridPane();
-
-		// Make 9 buttons
-		for (int i = 0; i < 3; i++) {
-			for (int j = 0; j < 3; j++) {
-				b[i][j] = new Button();
-				b[i][j].setMinWidth(100);
-				b[i][j].setMinHeight(100);
-				grid.add(b[i][j], i, j);
-
-				int x = i;
-				int y = j;
-				
-				b[i][j].setOnAction(new EventHandler<ActionEvent>() {
-					public void handle(ActionEvent e) {
-						if (turnCounter % 2 == 0) {
-							b[x][y].setText("X");
-						} else
-							b[x][y].setText("Y");
-						System.out.println(turnCounter);
-					}
-				});
-
+					b[i][j].setOnAction(new EventHandler<ActionEvent>() {
+						public void handle(ActionEvent e) {
+							int turnCounter = 0;
+							if (turnCounter % 2 == 0) {
+								b[x][y].setText("X");
+								turnCounter++;
+							} else {
+								b[x][y].setText("O");
+								turnCounter++;
+							}
+							System.out.println(turnCounter);
+						}
+					});
+				}
 			}
 		}
 
@@ -93,5 +89,4 @@ public class Noughts_Crosses extends Application {
 		launch(args);
 
 	}
-
 }
