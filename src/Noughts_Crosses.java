@@ -2,6 +2,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.application.Application;
 import javafx.beans.property.ObjectProperty;
@@ -109,15 +110,11 @@ public class Noughts_Crosses extends Application {
 				b[i][j].setOnAction(new EventHandler<ActionEvent>() {
 					public void handle(ActionEvent e) {
 						if (turnCounter <= 9) {
-							if (turnCounter >= 5 & turnCounter <= 9) {
-								// Check whether there is a winner
-								checkWinnerO();
-								checkWinnerX();
-								if (end = true) {
-									// Output end of game
-								}
+							if (end = true) {
+								// Output end of game
+								Text t = new Text();
+								t.setText("There is a winner!");
 							}
-							end = false;
 							if (turnCounter % 2 == 0) {
 								b[x][y].setText("X");
 								turnCounter = turnCounter + 1;
@@ -127,6 +124,9 @@ public class Noughts_Crosses extends Application {
 							}
 							System.out.println(turnCounter);
 						}
+						// Check whether there is a winner
+						checkWinnerO();
+						checkWinnerX();
 						end = true;
 						System.out.println("Game is over");
 					}
