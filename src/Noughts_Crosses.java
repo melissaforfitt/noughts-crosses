@@ -12,6 +12,7 @@ public class Noughts_Crosses extends Application {
 
 	Button b[][] = new Button[3][3];
 	GridPane grid = new GridPane();
+	int turnCounter = 0;
 
 	public void buildGrid() {
 
@@ -25,22 +26,9 @@ public class Noughts_Crosses extends Application {
 
 			}
 		}
-
 	}
 
-	public boolean markedX() {
-
-		boolean x = true;
-
-		return x;
-
-	}
-
-	public boolean markedY() {
-
-		boolean y = true;
-
-		return y;
+	public void checkWinner() {
 
 	}
 
@@ -49,30 +37,30 @@ public class Noughts_Crosses extends Application {
 
 		buildGrid();
 
-		// Make buttons clickable for X and Y to appear on relevant turn
+		// Make buttons clickable for X and O to appear on relevant turn
 
-		int turnCounter = 0;
-		while (turnCounter < 10) {
-			for (int i = 0; i < 3; i++) {
-				for (int j = 0; j < 3; j++) {
-					int x = i;
-					int y = j;
+		for (int i = 0; i < 3; i++) {
+			for (int j = 0; j < 3; j++) {
+				int x = i;
+				int y = j;
 
-					b[i][j].setOnAction(new EventHandler<ActionEvent>() {
-						public void handle(ActionEvent e) {
-							int turnCounter = 0;
-							if (turnCounter % 2 == 0) {
-								b[x][y].setText("X");
-								turnCounter++;
-							} else {
-								b[x][y].setText("O");
-								turnCounter++;
-							}
-							System.out.println(turnCounter);
+				b[i][j].setOnAction(new EventHandler<ActionEvent>() {
+					public void handle(ActionEvent e) {
+						if (turnCounter >= 5) {
+							// Check whether there is a winner
 						}
-					});
-				}
+						if (turnCounter % 2 == 0) {
+							b[x][y].setText("X");
+							turnCounter = turnCounter + 1;
+						} else {
+							b[x][y].setText("O");
+							turnCounter = turnCounter + 1;
+						}
+						System.out.println(turnCounter);
+					}
+				});
 			}
+
 		}
 
 		// Create scene
