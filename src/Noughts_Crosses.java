@@ -13,6 +13,7 @@ public class Noughts_Crosses extends Application {
 	Button b[][] = new Button[3][3];
 	GridPane grid = new GridPane();
 	int turnCounter = 0;
+	boolean end = false;
 
 	public void buildGrid() {
 
@@ -28,7 +29,68 @@ public class Noughts_Crosses extends Application {
 		}
 	}
 
-	public void checkWinner() {
+	public void checkWinnerO() {
+
+		// Checks if there is a diagonal win
+		for (int i = 0; i < 3; i++) {
+			for (int j = 0; j < 3; j++) {
+				if (b[i][j].getText() == "O") {
+					if (b[i + 1][j + 1].getText() == "O") {
+						if (b[i + 2][j + 2].getText() == "O") {
+							end = true;
+						}
+					}
+				}
+				// Checks if there is a horizontal win
+				if (b[i + 1][j].getText() == "O") {
+					if (b[i + 2][j].getText() == "O") {
+						end = true;
+					}
+				}
+				// Checks if there is a vertical win
+				if (b[i][j + 1].getText() == "O") {
+					if (b[i][j + 2].getText() == "O") {
+						end = true;
+					}
+				}
+			}
+		}
+	}
+
+	public void checkWinnerX() {
+
+		// Checks if there is a diagonal win
+		for (int i = 0; i < 3; i++) {
+			for (int j = 0; j < 3; j++) {
+				if (b[i][j].getText() == "X") {
+					if (b[i + 1][j + 1].getText() == "X") {
+						if (b[i + 2][j + 2].getText() == "X") {
+							end = true;
+						}
+					}
+				}
+				// Checks if there is a horizontal win
+				if (b[i + 1][j].getText() == "X") {
+					if (b[i + 2][j].getText() == "X") {
+						end = true;
+					}
+				}
+				// Checks if there is a vertical win
+				if (b[i][j + 1].getText() == "X") {
+					if (b[i][j + 2].getText() == "X") {
+						end = true;
+					}
+				}
+			}
+		}
+
+	}
+
+	public void markX() {
+
+	}
+
+	public void markO() {
 
 	}
 
@@ -46,17 +108,27 @@ public class Noughts_Crosses extends Application {
 
 				b[i][j].setOnAction(new EventHandler<ActionEvent>() {
 					public void handle(ActionEvent e) {
-						if (turnCounter >= 5) {
-							// Check whether there is a winner
+						if (turnCounter <= 9) {
+							if (turnCounter >= 5 & turnCounter <= 9) {
+								// Check whether there is a winner
+								checkWinnerO();
+								checkWinnerX();
+								if (end = true) {
+									// Output end of game
+								}
+							}
+							end = false;
+							if (turnCounter % 2 == 0) {
+								b[x][y].setText("X");
+								turnCounter = turnCounter + 1;
+							} else {
+								b[x][y].setText("O");
+								turnCounter = turnCounter + 1;
+							}
+							System.out.println(turnCounter);
 						}
-						if (turnCounter % 2 == 0) {
-							b[x][y].setText("X");
-							turnCounter = turnCounter + 1;
-						} else {
-							b[x][y].setText("O");
-							turnCounter = turnCounter + 1;
-						}
-						System.out.println(turnCounter);
+						end = true;
+						System.out.println("Game is over");
 					}
 				});
 			}
