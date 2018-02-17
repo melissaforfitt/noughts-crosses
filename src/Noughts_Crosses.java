@@ -30,69 +30,108 @@ public class Noughts_Crosses extends Application {
 		}
 	}
 
-	public void checkWinnerO() {
+	public boolean winnerCheck1(String player) {
 
-		// Checks if there is a diagonal win
-		for (int i = 0; i < 3; i++) {
-			for (int j = 0; j < 3; j++) {
-				if (b[i][j].getText() == "O") {
-					if (b[i + 1][j + 1].getText() == "O") {
-						if (b[i + 2][j + 2].getText() == "O") {
-							end = true;
-						}
-					}
-				}
-				// Checks if there is a horizontal win
-				if (b[i + 1][j].getText() == "O") {
-					if (b[i + 2][j].getText() == "O") {
-						end = true;
-					}
-				}
-				// Checks if there is a vertical win
-				if (b[i][j + 1].getText() == "O") {
-					if (b[i][j + 2].getText() == "O") {
-						end = true;
-					}
+		// Check if there is a win on the first vertical column
+		if (b[0][0].getText() == player) {
+			if (b[0][1].getText() == player) {
+				if (b[0][2].getText() == player) {
+					end = true;
 				}
 			}
 		}
+		return end;
 	}
 
-	public void checkWinnerX() {
+	public boolean winnerCheck2(String player) {
 
-		// Checks if there is a diagonal win
-		for (int i = 0; i < 3; i++) {
-			for (int j = 0; j < 3; j++) {
-				if (b[i][j].getText() == "X") {
-					if (b[i + 1][j + 1].getText() == "X") {
-						if (b[i + 2][j + 2].getText() == "X") {
-							end = true;
-						}
-					}
-				}
-				// Checks if there is a horizontal win
-				if (b[i + 1][j].getText() == "X") {
-					if (b[i + 2][j].getText() == "X") {
-						end = true;
-					}
-				}
-				// Checks if there is a vertical win
-				if (b[i][j + 1].getText() == "X") {
-					if (b[i][j + 2].getText() == "X") {
-						end = true;
-					}
+		// Check if there is a win on the second vertical column
+		if (b[1][0].getText() == player) {
+			if (b[1][1].getText() == player) {
+				if (b[1][2].getText() == player) {
+					end = true;
 				}
 			}
 		}
-
+		return end;
 	}
 
-	public void markX() {
+	public boolean winnerCheck3(String player) {
 
+		// Check if there is a win on the third vertical column
+		if (b[2][0].getText() == player) {
+			if (b[2][1].getText() == player) {
+				if (b[2][2].getText() == player) {
+					end = true;
+				}
+			}
+		}
+		return end;
 	}
 
-	public void markO() {
+	public boolean winnerCheck4(String player) {
 
+		// Check if there is a win on the first horizontal row
+		if (b[0][0].getText() == player) {
+			if (b[1][0].getText() == player) {
+				if (b[2][0].getText() == player) {
+					end = true;
+				}
+			}
+		}
+		return end;
+	}
+
+	public boolean winnerCheck5(String player) {
+
+		// Check if there is a win on the second horizontal row
+		if (b[0][1].getText() == player) {
+			if (b[1][1].getText() == player) {
+				if (b[2][1].getText() == player) {
+					end = true;
+				}
+			}
+		}
+		return end;
+	}
+
+	public boolean winnerCheck6(String player) {
+
+		// Check if there is a win on the third horizontal row
+		if (b[0][2].getText() == player) {
+			if (b[1][2].getText() == player) {
+				if (b[2][2].getText() == player) {
+					end = true;
+				}
+			}
+		}
+		return end;
+	}
+
+	public boolean winnerCheck7(String player) {
+
+		// Check if there is a diagonal win (downwards)
+		if (b[0][0].getText() == player) {
+			if (b[1][1].getText() == player) {
+				if (b[2][2].getText() == player) {
+					end = true;
+				}
+			}
+		}
+		return end;
+	}
+
+	public boolean winnerCheck8(String player) {
+
+		// Check if there is a diagonal win (upwards)
+		if (b[2][0].getText() == player) {
+			if (b[1][1].getText() == player) {
+				if (b[0][2].getText() == player) {
+					end = true;
+				}
+			}
+		}
+		return end;
 	}
 
 	@Override
@@ -109,26 +148,31 @@ public class Noughts_Crosses extends Application {
 
 				b[i][j].setOnAction(new EventHandler<ActionEvent>() {
 					public void handle(ActionEvent e) {
-						if (turnCounter <= 9) {
-							if (end = true) {
-								// Output end of game
-								Text t = new Text();
-								t.setText("There is a winner!");
-							}
-							if (turnCounter % 2 == 0) {
-								b[x][y].setText("X");
-								turnCounter = turnCounter + 1;
-							} else {
-								b[x][y].setText("O");
-								turnCounter = turnCounter + 1;
-							}
-							System.out.println(turnCounter);
+						String xPlayer = "X";
+						String oPlayer = "O";
+						String player = "";
+						if (turnCounter % 2 == 0) {
+							player = xPlayer;
+						} else {
+							player = oPlayer;
 						}
+						if (turnCounter <= 9) {
+							b[x][y].setText(player);
+							turnCounter = turnCounter + 1;
+						}
+						System.out.println(turnCounter);
 						// Check whether there is a winner
-						checkWinnerO();
-						checkWinnerX();
-						end = true;
-						System.out.println("Game is over");
+						winnerCheck1(player);
+						winnerCheck2();
+						winnerCheck3();
+						winnerCheck4();
+						winnerCheck5();
+						winnerCheck6();
+						winnerCheck7();
+						winnerCheck8();
+						if (end == true) {
+							System.out.println("Game is over. There is a winner.");
+						}
 					}
 				});
 			}
