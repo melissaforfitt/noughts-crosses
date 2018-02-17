@@ -19,6 +19,7 @@ public class Noughts_Crosses extends Application {
 	GridPane grid = new GridPane();
 	int turnCounter = 0;
 	boolean end = false;
+	boolean used[][] = new boolean[3][3];
 
 	public void buildGrid() {
 
@@ -140,10 +141,6 @@ public class Noughts_Crosses extends Application {
 
 	public void AI() {
 
-		Random r = new Random();
-		int i = r.nextInt(2) + 0;
-		int j = r.nextInt(2) + 0;
-
 	}
 
 	@Override
@@ -164,12 +161,22 @@ public class Noughts_Crosses extends Application {
 						String oPlayer = "O";
 						String player = "";
 						if (turnCounter % 2 == 0) {
+							if (used[x][y] == true) {
+								Text error = new Text("Space taken");
+								grid.add(error, 0, 155);
+							}
 							player = xPlayer;
+							b[x][y].setText(player);
+							used[x][y] = true;
+							turnCounter = turnCounter + 1;
 						} else {
 							player = oPlayer;
-						}
-						if (turnCounter <= 9) {
-							b[x][y].setText(player);
+							Random r = new Random();
+							int[] random = new int[2];
+							random[0] = r.nextInt(3) + 0;
+							random[1] = r.nextInt(3) + 0;
+							b[random[0]][random[1]].setText(player);
+							used[x][y] = true;
 							turnCounter = turnCounter + 1;
 						}
 						System.out.println(turnCounter);
