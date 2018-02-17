@@ -163,15 +163,15 @@ public class Noughts_Crosses extends Application {
 						System.out.println(turnCounter);
 						// Check whether there is a winner
 						winnerCheck1(player);
-						winnerCheck2();
-						winnerCheck3();
-						winnerCheck4();
-						winnerCheck5();
-						winnerCheck6();
-						winnerCheck7();
-						winnerCheck8();
+						winnerCheck2(player);
+						winnerCheck3(player);
+						winnerCheck4(player);
+						winnerCheck5(player);
+						winnerCheck6(player);
+						winnerCheck7(player);
+						winnerCheck8(player);
 						if (end == true) {
-							System.out.println("Game is over. There is a winner.");
+							System.out.println("Game is over. " + player + " is the winner.");
 						}
 					}
 				});
