@@ -1,9 +1,13 @@
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+
+import java.util.Random;
+
 import javafx.application.Application;
 import javafx.beans.property.ObjectProperty;
 import javafx.event.ActionEvent;
@@ -134,6 +138,14 @@ public class Noughts_Crosses extends Application {
 		return end;
 	}
 
+	public void AI() {
+
+		Random r = new Random();
+		int i = r.nextInt(2) + 0;
+		int j = r.nextInt(2) + 0;
+
+	}
+
 	@Override
 	public void start(Stage primaryStage) {
 
@@ -171,14 +183,18 @@ public class Noughts_Crosses extends Application {
 						winnerCheck7(player);
 						winnerCheck8(player);
 						if (end == true) {
-							System.out.println("Game is over. " + player + " is the winner.");
+							Text text1 = new Text("Game over.");
+							grid.add(text1, 0, 155);
+							Text text2 = new Text(player + " is the winner.");
+							grid.add(text2, 0, 165);
+							System.out.println("Game over. " + player + " is the winner.");
 						}
 					}
 				});
 
 				// Set up a refresh button for a new game
 				Button newGame = new Button("New Game");
-				grid.add(newGame, 50, 150);
+				grid.add(newGame, 0, 175);
 				newGame.setOnAction(new EventHandler<ActionEvent>() {
 					public void handle(ActionEvent e) {
 						// Code for clearing grid
@@ -194,7 +210,7 @@ public class Noughts_Crosses extends Application {
 		}
 
 		// Create scene
-		Scene scene = new Scene(grid, 400, 350);
+		Scene scene = new Scene(grid, 300, 360);
 
 		primaryStage.setTitle("Noughts and Crosses");
 		primaryStage.setScene(scene);
