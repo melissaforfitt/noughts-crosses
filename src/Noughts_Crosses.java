@@ -175,12 +175,26 @@ public class Noughts_Crosses extends Application {
 						}
 					}
 				});
-			}
 
+				// Set up a refresh button for a new game
+				Button newGame = new Button("New Game");
+				grid.add(newGame, 50, 150);
+				newGame.setOnAction(new EventHandler<ActionEvent>() {
+					public void handle(ActionEvent e) {
+						// Code for clearing grid
+						for (int i = 0; i < 3; i++) {
+							for (int j = 0; j < 3; j++) {
+								b[i][j].setText(" ");
+								turnCounter = 0;
+							}
+						}
+					}
+				});
+			}
 		}
 
 		// Create scene
-		Scene scene = new Scene(grid, 300, 300);
+		Scene scene = new Scene(grid, 400, 350);
 
 		primaryStage.setTitle("Noughts and Crosses");
 		primaryStage.setScene(scene);
