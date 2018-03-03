@@ -1,17 +1,12 @@
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-import java.awt.Point;
-import java.util.ArrayList;
 import java.util.Random;
 
 import javafx.application.Application;
-import javafx.beans.property.ObjectProperty;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 
@@ -154,59 +149,63 @@ public class Noughts_Crosses extends Application {
 
 				b[i][j].setOnAction(new EventHandler<ActionEvent>() {
 					public void handle(ActionEvent e) {
+						boolean played = false;
 						String xPlayer = "X";
 						String oPlayer = "O";
 						String player = "";
 
 						// User's turn
 						if (turnCounter % 2 == 0) {
-							if (used[x][y] == true) {
-								Text error = new Text("Space taken");
-								grid.add(error, 0, 155);
-							}
-							player = xPlayer;
-							b[x][y].setText(player);
-							used[x][y] = true;
-							turnCounter = turnCounter + 1;
-						} else {
-
-							// Computer's turn
-							player = oPlayer;
-							boolean played = false;
 							while (played == false) {
-								Random r = new Random();
-								int c = r.nextInt(2) + 1;
-								int d = r.nextInt(2) + 1;
-								if (used[c][d] == true) {
-									c = r.nextInt(2) + 0;
-									d = r.nextInt(2) + 0;
-								} else {
-									b[c][d].setText(player);
-									used[c][d] = true;
-									played = true;
+								if (used[x][y] == true) {
+									Text error = new Text("Space taken");
+									grid.add(error, 0, 155);
+									played = false;
 								}
+								player = xPlayer;
+								b[x][y].setText(player);
+								used[x][y] = true;
+								played = true;
 							}
 							turnCounter = turnCounter + 1;
-
-							System.out.println(turnCounter);
-
-							// Check whether there is a winner
-							winnerCheck1(player);
-							winnerCheck2(player);
-							winnerCheck3(player);
-							winnerCheck4(player);
-							winnerCheck5(player);
-							winnerCheck6(player);
-							winnerCheck7(player);
-							winnerCheck8(player);
-							if (end == true) {
-								Text text1 = new Text("Game over.");
-								grid.add(text1, 0, 155);
-								Text text2 = new Text(player + " is the winner.");
-								grid.add(text2, 0, 165);
-								System.out.println("Game over. " + player + " is the winner.");
+						}
+						// Computer's turn
+						player = oPlayer;
+						played = false;
+						while (played == false) {
+							Random r = new Random();
+							int c = r.nextInt(2) + 1;
+							int d = r.nextInt(2) + 1;
+							if (used[c][d] == true) {
+								c = r.nextInt(2) + 0;
+								d = r.nextInt(2) + 0;
+							} else {
+								b[c][d].setText(player);
+								used[c][d] = true;
+								played = true;
 							}
 						}
+						turnCounter = turnCounter + 1;
+
+						System.out.println(turnCounter);
+
+						// Check whether there is a winner
+						winnerCheck1(player);
+						winnerCheck2(player);
+						winnerCheck3(player);
+						winnerCheck4(player);
+						winnerCheck5(player);
+						winnerCheck6(player);
+						winnerCheck7(player);
+						winnerCheck8(player);
+						if (end == true) {
+							Text text1 = new Text("Game over.");
+							grid.add(text1, 0, 155);
+							Text text2 = new Text(player + " is the winner.");
+							grid.add(text2, 0, 165);
+							System.out.println("Game over. " + player + " is the winner.");
+						}
+
 					}
 				});
 
