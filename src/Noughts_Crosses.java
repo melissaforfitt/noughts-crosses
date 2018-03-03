@@ -157,6 +157,8 @@ public class Noughts_Crosses extends Application {
 						String xPlayer = "X";
 						String oPlayer = "O";
 						String player = "";
+
+						// User's turn
 						if (turnCounter % 2 == 0) {
 							if (used[x][y] == true) {
 								Text error = new Text("Space taken");
@@ -165,11 +167,10 @@ public class Noughts_Crosses extends Application {
 							player = xPlayer;
 							b[x][y].setText(player);
 							used[x][y] = true;
-							System.out.println("X is" + x);
-							System.out.println("Y is" + y);
-
 							turnCounter = turnCounter + 1;
 						} else {
+
+							// Computer's turn
 							player = oPlayer;
 							boolean played = false;
 							while (played == false) {
@@ -181,8 +182,6 @@ public class Noughts_Crosses extends Application {
 									d = r.nextInt(2) + 0;
 								} else {
 									b[c][d].setText(player);
-									System.out.println("la" + c);
-									System.out.println(" la 2" + d);
 									used[c][d] = true;
 									played = true;
 								}
