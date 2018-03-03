@@ -167,7 +167,6 @@ public class Noughts_Crosses extends Application {
 								used[x][y] = true;
 								played = true;
 							}
-							turnCounter = turnCounter + 1;
 						}
 						// Computer's turn
 						player = oPlayer;
@@ -183,10 +182,9 @@ public class Noughts_Crosses extends Application {
 								b[c][d].setText(player);
 								used[c][d] = true;
 								played = true;
+								turnCounter = turnCounter + 1;
 							}
 						}
-						turnCounter = turnCounter + 1;
-
 						System.out.println(turnCounter);
 
 						// Check whether there is a winner
@@ -205,7 +203,6 @@ public class Noughts_Crosses extends Application {
 							grid.add(text2, 0, 165);
 							System.out.println("Game over. " + player + " is the winner.");
 						}
-
 					}
 				});
 
